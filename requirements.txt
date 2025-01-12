@@ -6,3 +6,5 @@ python-dotenv>=1.0.0
 celery>=5.3.4
 redis>=5.0.1
 PyGithub>=2.1.1  # For GitHub API integration
+openai>=0.10.0  # For OpenAI API integration
+gemini>=1.0.0  # For Gemini API integration

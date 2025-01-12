@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     # External Services
     GITHUB_API_TOKEN: Optional[str] = None
     GEMINI_API_KEY: Optional[str] = None
+
+    # Logging Settings
+    LOG_LEVEL: str = "DEBUG"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    LOG_FORMAT: str = "json"  # json or text
+    LOG_FILE_PATH: Optional[str] = None
     
     class Config:
         env_file = ".env"
