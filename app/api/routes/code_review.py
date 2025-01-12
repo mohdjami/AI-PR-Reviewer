@@ -1,11 +1,17 @@
 from fastapi import APIRouter, HTTPException
 from app.schemas.github import PullRequestAnalysisRequest
+from app.services.github import GithubService
 
 router = APIRouter(prefix="/code-review", tags=["code-review"])
 
 @router.post("/analyze-pr")
 async def analyze_pull_request(request: PullRequestAnalysisRequest):
     try:
+        # initiate the github service
+        github_service = GithubService(request.github_token)
+        # get the pull request details
+        pr_details = github_service.pull_request_details(str(request.repo_url), request.pr_number)
+        # return the response
         return {
             "status": "accepted",
             "message": "Analysis started",
