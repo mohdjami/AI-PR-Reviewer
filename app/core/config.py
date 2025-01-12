@@ -1,42 +1,45 @@
-from typing import Optional
+# app/core/config.py
+from typing import Optional, List
 from pydantic_settings import BaseSettings
 from enum import Enum
 
-class Environment(str, Enum):
+class EnvironmentType(str, Enum):
     DEVELOPMENT = "development"
-    TESTING = "testing"
     STAGING = "staging"
     PRODUCTION = "production"
 
 class Settings(BaseSettings):
-    #Basic API Settings
+    # Basic API Settings
     API_V1_STR: str = "/api/v1"
-    PROJECT_NAME: str = "Code Review Agent" 
-    DESCRIPTION: str = "An AI-powered code review system"
+    PROJECT_NAME: str = "Code Review Agent"
     VERSION: str = "0.1.0"
-
-    #Environment Settings
-    ENVIRONMENT: Environment = Environment.DEVELOPMENT
-    DATABASE_URL: Optional[str] = None
-    DEBUG: bool = True
-
-    class Config:
-        env_file = ".env"
+    DESCRIPTION: str = "An AI-powered code review system"
     
-    #Server Settings
+    # Environment
+    ENVIRONMENT: EnvironmentType = EnvironmentType.DEVELOPMENT
+    DEBUG: bool = True
+    
+    # Server Settings
     HOST: str = "0.0.0.0"
     PORT: int = 8000
-
-    #CORS Settings
-    ALLOWED_ORIGINS: list[str] = ["*"]
-    ALLOWED_METHODS: list[str] = ["*"]
-    ALLOWED_HEADERS: list[str] = ["*"]
-
-    #API Security Settings
-    SECRET_KEY: str = "d3a6f7d3c9b3c6e7b1c6a7d3f6b3c9b3"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-
+    
+    # CORS Settings
+    ALLOWED_ORIGINS: List[str] = ["*"]
+    ALLOWED_METHODS: List[str] = ["*"]
+    ALLOWED_HEADERS: List[str] = ["*"]
+    
+    # API Security
+    SECRET_KEY: str = "your-secret-key-here"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    
+    # External Services
     GITHUB_API_TOKEN: Optional[str] = None
-    OPENAI_API_KEY: Optional[str] = None
+    GEMINI_API_KEY: Optional[str] = None
+    
+    class Config:
+        env_file = ".env"
+        case_sensitive = True
+        extra = "allow"  # This allows extra fields in the environment
 
+# Create global settings instance
 settings = Settings()

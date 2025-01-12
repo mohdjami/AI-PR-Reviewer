@@ -10,14 +10,14 @@ async def analyze_pull_request(request: PullRequestAnalysisRequest):
         # initiate the github service
         github_service = GithubService(request.github_token)
         # get the pull request details
-        pr_details = github_service.pull_request_details(str(request.repo_url), request.pr_number)
+        pr_details = await github_service.pull_request_details(str(request.repo_url), request.pr_number)
         # return the response
         return {
             "status": "accepted",
             "message": "Analysis started",
             "pr_number": request.pr_number,
             "repo_url": str(request.repo_url),
-            "details": pr_details
+            "data": pr_details
         }
     except Exception as e:
         raise HTTPException(
