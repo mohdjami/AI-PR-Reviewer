@@ -1,5 +1,6 @@
 # app/api/routes/health.py
 from fastapi import APIRouter
+from app.core.config import settings
 
 router = APIRouter(
     prefix="/health",
@@ -10,5 +11,7 @@ router = APIRouter(
 async def health_check():
     return {
         "status": "healthy",
-        "message": "Hello from Code Review Agent!"
+        "environment": settings.ENVIRONMENT,
+        "version": settings.VERSION,
+        "app_name": settings.PROJECT_NAME
     }
