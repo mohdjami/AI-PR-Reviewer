@@ -1,6 +1,6 @@
 # app/main.py
 from fastapi import FastAPI
-from app.api.routes import health
+from app.api.routes import code_review, health
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 
@@ -20,8 +20,8 @@ def create_app():
         allow_headers=settings.ALLOWED_HEADERS
     )
     # Include routers
-    app.include_router(health.router, prefix="/health")
-
+    app.include_router(health.router, prefix=settings.API_V1_STR)
+    app.include_router(code_review.router, prefix=settings.API_V1_STR)
     @app.get("/")
     async def root():
         return {"message": "Hello World"}

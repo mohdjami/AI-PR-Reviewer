@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from enum import Enum
 
 class Environment(str, Enum):
