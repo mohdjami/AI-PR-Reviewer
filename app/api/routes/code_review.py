@@ -16,7 +16,8 @@ async def analyze_pull_request(request: PullRequestAnalysisRequest):
             "status": "accepted",
             "message": "Analysis started",
             "pr_number": request.pr_number,
-            "repo_url": str(request.repo_url)
+            "repo_url": str(request.repo_url),
+            "details": pr_details
         }
     except Exception as e:
         raise HTTPException(
