@@ -112,7 +112,19 @@ Response:
     "created_at": "2024-01-12T10:00:00Z"
   },
   "analysis": {
-    "files": [...],
+    "files":  [
+   {
+       "name": "filename",
+       "issues": [
+           {
+               "type": "category",
+               "line": "line_number",
+               "description": "description",
+               "suggestion": "Suggestion"
+           },
+       ]
+   }
+],
     "summary": {
       "total_files": 5,
       "total_issues": 12,
